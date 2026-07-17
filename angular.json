@@ -6,5 +6,31 @@
   },
   "newProjectRoot": "projects",
   "projects": {
+    "portal-layout": {
+      "projectType": "library",
+      "root": "projects/portal-layout",
+      "sourceRoot": "projects/portal-layout/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/portal-layout/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/portal-layout/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/portal-layout/tsconfig.spec.json"
+          }
+        }
+      }
+    }
   }
 }

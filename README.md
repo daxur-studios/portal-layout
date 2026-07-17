@@ -1,59 +1,72 @@
-# PortalLayout
+# @daxur-studios/portal-layout
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.4.
+A decoupled layout portal engine for Angular applications, built with a CDK-like approach to give consuming applications maximum freedom over how layout areas, collapsible panels, and content projection behave.
 
-## Development server
+This workspace was generated using Angular CLI `v20.3.4` and uses `@angular/cdk` for template-to-outlet projection.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
+## Key Core Concepts
+
+### 1. Flexible Portal Projection
+Any component in any page can dynamically register and project content into predefined areas of the page shell using:
+* `[portalTarget]`: Directive to declare a template to be projected.
+* `<portalOutlet>`: Component that queries the registry and renders the active templates.
+
+### 2. Collapsible & Resizable Panes
+* Separates the state of collapsing/resizing from the actual handle styling.
+* Supports persisting collapse and custom dimensions across navigation/sessions.
+
+### 3. Responsive "Fit-to-Area" Auto-Scale (Conceptual)
+* Supports scaling components dynamically when their default dimensions exceed the available width/height of the layout slot.
+* By applying `transform: scale()` via ResizeObserver and container queries, components can gracefully shrink-to-fit without breaking overall page flow.
+
+### 4. Premade Layouts
+* Provides `<standardShellLayout>` representing a typical application grid layout containing `topToolbar`, `leftSidebar`, `rightSidebar`, `bottomToolbar`, and a main content slot.
+
+### 5. Nested Custom Areas
+* Outlets can be nested inside projected templates, allowing pages to register custom nested layouts (e.g. adding a custom "actions area" nested inside a standard "top header" layout).
+
+---
+
+## Getting Started
+
+### 1. Define the Shell Layout (App Level)
+```html
+<standardShellLayout>
+  <!-- Main content goes here -->
+  <router-outlet></router-outlet>
+</standardShellLayout>
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 2. Project Content (Page/Component Level)
+Project custom panels, actions, or views from anywhere in your page's template tree:
+```html
+<!-- Inside any page or subcomponent -->
+<ng-template portalTarget="rightSidebar" lane="panel">
+  <div class="production-preview-panel">
+    <h3>Preview with real data</h3>
+    <p>Context-aware tools rendered automatically in the sidebar.</p>
+  </div>
+</ng-template>
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+<ng-template portalTarget="topToolbar">
+  <button (click)="save()">Save Action</button>
+</ng-template>
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
+## CLI Commands
+
+### Build the Library
+To compile the library in partial compilation mode (ready to publish or consume locally):
 ```bash
-ng generate --help
+npm run build
 ```
+Build output is saved to `dist/portal-layout/`.
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+### Run Unit Tests
 ```bash
 ng test
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
