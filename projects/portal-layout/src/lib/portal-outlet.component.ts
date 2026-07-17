@@ -13,12 +13,17 @@ import { PortalRegistryService } from './portal-registry.service';
   imports: [CommonModule, PortalModule],
   template: `
     @for (entry of activeEntries(); track entry.id) {
-      <ng-template [cdkPortalOutlet]="entry.portal"></ng-template>
+      <div class="portal-entry-item-wrapper">
+        <ng-template [cdkPortalOutlet]="entry.portal"></ng-template>
+      </div>
     }
   `,
   styles: [`
     :host {
       display: contents;
+    }
+    .portal-entry-item-wrapper {
+      pointer-events: auto;
     }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
