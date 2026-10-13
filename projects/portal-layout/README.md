@@ -1,63 +1,50 @@
-# PortalLayout
+# @daxur-studios/portal-layout
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.0.
+Angular template portals for named layout areas. Register a template anywhere in an application's component tree and render it in a matching outlet, with optional lane filtering and ordering.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Install
 
 ```bash
-ng generate component component-name
+npm install @daxur-studios/portal-layout @angular/cdk
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Required peers are Angular Common/Core `^20.3.0` and Angular CDK `^20.0.0`. Angular Material is not required.
 
-```bash
-ng generate --help
+## Use
+
+Import `PortalOutletComponent` and `PortalTargetDirective` in the standalone components using them:
+
+```ts
+import {
+  PortalOutletComponent,
+  PortalTargetDirective,
+} from '@daxur-studios/portal-layout';
+
+// @Component({ imports: [PortalOutletComponent, PortalTargetDirective], ... })
 ```
 
-## Building
+Place the outlet in the shell and register content from a page/component sharing its registry:
 
-To build the library, run:
+```html
+<portalOutlet area="rightSidebar" [lanes]="['panel']" />
 
-```bash
-ng build portal-layout
+<ng-template portalTarget="rightSidebar" lane="panel" [order]="10">
+  <p>Page-specific sidebar content</p>
+</ng-template>
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+Registration happens after the next render. Destroying the directive unregisters its portal automatically. Area names are application-defined; outlets without a `lanes` filter render every lane in the requested area, sorted by ascending `order`.
 
-### Publishing the Library
+The package also exports `PortalRegistryService`, `PortalEntry`, and `StandardShellLayoutComponent`. The optional `standardShellLayout` component provides `topToolbar`, `bottomToolbar`, `leftSidebar`, and `rightSidebar` outlets around projected main content. Its default layout fills the viewport; applications can compose their own outlets when they need a different shell. Pane resizing, collapse controls, and persistence belong to the consuming application.
 
-Once the project is built, you can publish your library by following these steps:
+## Maintainers
 
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/portal-layout
-   ```
+From the repository root:
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+```powershell
+npm run publish:check
+npm login --auth-type=web --registry=https://registry.npmjs.org/
+npm run publish:portal-layout
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The publish script builds the production Angular package and publishes `dist/portal-layout`, using the version from `projects/portal-layout/package.json`. Complete npm's browser/2FA prompts locally. The logged-in account must have publish permission for the `@daxur-studios` scope.

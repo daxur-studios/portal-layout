@@ -66,6 +66,19 @@ npm run build
 ```
 Build output is saved to `dist/portal-layout/`.
 
+### Publish to npm
+
+The workspace root is private; publish the built library with these commands:
+
+```powershell
+npm run publish:check
+npm login --auth-type=web --registry=https://registry.npmjs.org/
+npm run publish:portal-layout
+npm view @daxur-studios/portal-layout version --registry=https://registry.npmjs.org/
+```
+
+Complete npm's browser/2FA prompts locally with an account allowed to publish under `@daxur-studios`. The script rebuilds the production distribution and publishes it publicly. Change `projects/portal-layout/package.json` for later release versions; an existing published version cannot be reused. See the [package usage guide](projects/portal-layout/README.md) and [publishing plan](docs/plans/00_npm-publishing.md).
+
 ### Run Unit Tests
 ```bash
 ng test

@@ -5,6 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:portal-layout": "ng build portal-layout --configuration production",
+    "pack:portal-layout": "npm run build:portal-layout && npm pack ./dist/portal-layout --pack-destination ./dist",
+    "publish:check": "npm run build:portal-layout && npm publish ./dist/portal-layout --dry-run --access public --registry https://registry.npmjs.org/",
+    "publish:portal-layout": "npm run build:portal-layout && npm publish ./dist/portal-layout --access public --registry https://registry.npmjs.org/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "format": "prettier --write ."

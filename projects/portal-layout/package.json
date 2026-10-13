@@ -1,6 +1,15 @@
 {
   "name": "@daxur-studios/portal-layout",
   "version": "0.0.1",
+  "description": "Angular template portals for named layout areas, ordered lanes, and application shells.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daxur-studios/portal-layout.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "peerDependencies": {
     "@angular/cdk": "^20.0.0",
     "@angular/common": "^20.3.0",
