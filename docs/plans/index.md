@@ -10,6 +10,6 @@ tags: [plans, index]
 
 | Plan | Status | Runbook |
 | --- | --- | --- |
-| [npm Publishing](/docs/plans/00_npm-publishing.md) | in-progress | [Release evidence](/docs/runbook/00_npm-publishing.md) |
+| [npm Publishing](/docs/plans/00_npm-publishing.md) | done | [Release evidence](/docs/runbook/00_npm-publishing.md) |
 
 Convention: [Plans and Runbooks](/docs/plans-and-runbooks.md).
