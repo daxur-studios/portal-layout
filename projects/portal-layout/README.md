@@ -37,6 +37,18 @@ Registration happens after the next render. Destroying the directive unregisters
 
 The package also exports `PortalRegistryService`, `PortalEntry`, and `StandardShellLayoutComponent`. The optional `standardShellLayout` component provides `topToolbar`, `bottomToolbar`, `leftSidebar`, and `rightSidebar` outlets around projected main content. Its default layout fills the viewport; applications can compose their own outlets when they need a different shell. Pane resizing, collapse controls, and persistence belong to the consuming application.
 
+## AI agent skills
+
+The published package bundles usage guidance for AI coding agents under `skills/`. Projects that use an `.agents/skills.json` manifest can register the installed copy so agents (Antigravity, Claude, etc.) automatically discover the `portal-layout-usage` skill:
+
+```json
+{
+  "entries": [
+    { "path": "node_modules/@daxur-studios/portal-layout/skills" }
+  ]
+}
+```
+
 ## Maintainers
 
 From the repository root:

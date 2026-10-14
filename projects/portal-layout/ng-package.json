@@ -3,5 +3,12 @@
   "dest": "../../dist/portal-layout",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": [
+    {
+      "glob": "**/*",
+      "input": "./.agent/skills",
+      "output": "./skills"
+    }
+  ]
 }
