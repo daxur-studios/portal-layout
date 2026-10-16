@@ -7,7 +7,7 @@
   "assets": [
     {
       "glob": "**/*",
-      "input": "./.agent/skills",
+      "input": "./.agents/skills",
       "output": "./skills"
     }
   ]
